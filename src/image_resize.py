@@ -57,7 +57,16 @@ def image_resize(input_path, output_path=None, target_kb=175, step=1, min_qualit
             break
         if quality <= min_quality:
             quality = 95
-            percent -= 5
+            if size_kb > target_kb * 5:
+                percent -= 25
+            elif size_kb > target_kb * 4:
+                percent -= 20
+            elif size_kb > target_kb * 3:
+                percent -= 15
+            elif size_kb > target_kb * 2:
+                percent -= 10
+            else: 
+                percent -= 5
         quality -= step
 
     print(f"✅ Final size: {size_kb:.1f} KB | Quality {quality} | Scale {percent}%")
