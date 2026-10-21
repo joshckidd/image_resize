@@ -53,17 +53,18 @@ def image_resize(input_path, output_path=None, target_kb=175, step=1, min_qualit
         )
 
         size_kb = os.path.getsize(output_path) / 1024
+        size_tier = 0.5
         if size_kb <= target_kb:
             break
         if quality <= min_quality:
             quality = 95
-            if size_kb > target_kb * 5:
+            if size_kb > target_kb * 5 * size_tier:
                 percent -= 25
-            elif size_kb > target_kb * 4:
+            elif size_kb > target_kb * 4 * size_tier:
                 percent -= 20
-            elif size_kb > target_kb * 3:
+            elif size_kb > target_kb * 3 * size_tier:
                 percent -= 15
-            elif size_kb > target_kb * 2:
+            elif size_kb > target_kb * 2 * size_tier:
                 percent -= 10
             else: 
                 percent -= 5
